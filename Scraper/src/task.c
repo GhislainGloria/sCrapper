@@ -85,8 +85,8 @@ void delTask(Task *task){
 	free(task);
 }
 
-
 /*
+
 int main(int argc, char* argv[]){
 
 	Criterion* c1 = initCriterion();
@@ -127,5 +127,6 @@ int main(int argc, char* argv[]){
 
 	return EXIT_SUCCESS;
 }
+
 */
 

@@ -66,6 +66,39 @@ void delControllerTask(ControllerTask *controllerTask){
 
 }
 
+
+
+void parse(char *fname){
+	FILE *f = fopen(fname, "r");
+	if(f != NULL){
+		fseek(f,0,SEEK_SET);
+
+		char c = fgetc(f);
+		while(c != EOF){
+
+			//si c est un = alors j'initialise une action vide
+			//si c est un ...
+
+		}
+
+
+		fclose(f);
+
+	}else{
+		printf("Can't open file");
+		exit(1);
+	}
+}
+
+
+
+
+int main(int argc, char* argv[]){
+	char *fname = "files/fconfig.sconf";
+	parse(fname);
+	return EXIT_SUCCESS;
+}
+
 /*
 
 int main(int argc, char* argv[]){
