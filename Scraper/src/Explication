@@ -1,0 +1,40 @@
+Une critère est composée 
+	d'un nombre d'heure, 
+	de minute 
+	et de seconde
+
+
+Une option est composée 
+	d'une key, 
+	d'un compteur de value, 
+	de la taille du tableau value 
+	et du tableau value
+	
+		(key -> value1 , value2...,valueN)
+		J'ai bloqué le nombre de value(taille du tab) à 5 mais on peut changer
+
+
+Une action est composée 
+	d'un nom, 
+	d'une url, 
+	d'un compteur d'option, 
+	de la taille du tableau 
+	et du tableau d'option
+
+		J'ai également bloqué le nombre d'option(taille du tab) à 5
+
+Une tache est composée
+	d'un nom
+	d'une critère
+	d'un compteur d'action
+	de la taille du tableau
+	et du tableau d'action
+	
+		J'ai aussi bloqué le nombre d'action(taille du tab action) à 5
+		
+		
+Un controlleur de tache est juste composé
+	d'un compteur de tache
+	de la taille du tab
+	et du tab de tache
+	(c'est ICI qu'on va parser et qu'on va ajouter petit à petit dans le tab de tache)
