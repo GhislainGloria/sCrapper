@@ -66,28 +66,36 @@ void delControllerTask(ControllerTask *controllerTask){
 
 }
 
-
-
-void parse(char *fname){
-	FILE *f = fopen(fname, "r");
-	if(f != NULL){
-		fseek(f,0,SEEK_SET);
-
-		char c = fgetc(f);
-		while(c != EOF){
-
-			//si c est un = alors j'initialise une action vide
-			//si c est un ...
-
+//-----------------------------------------------TEST---------------------------------------------------//
+int *countAction(char *fname1){
+	FILE *file = fopen(fname1, "r");
+	int nbrAction = 0;
+	if(file != NULL){
+		//printf("File opened\n");
+		char caracter = fgetc(file);
+		while(caracter != EOF){
+			if(caracter == '='){
+				nbrAction++;
+			}
+			caracter = fgetc(file);
 		}
-
-
-		fclose(f);
-
-	}else{
-		printf("Can't open file");
-		exit(1);
 	}
+	int *pointer = &nbrAction;
+	fclose(file);
+	return pointer;
+}
+
+
+
+
+void parse(char *fname2){
+	int *pointerOnNbrAction = countAction(fname2);
+	printf("LIGNES %d\n",*pointerOnNbrAction);
+	FILE *f = fopen(fname2, "r");
+	if(f != NULL){
+		printf("File opened\n");
+	}
+	fclose(f);
 }
 
 
@@ -98,6 +106,10 @@ int main(int argc, char* argv[]){
 	parse(fname);
 	return EXIT_SUCCESS;
 }
+
+
+
+//-----------------------------------------------TEST---------------------------------------------------//
 
 /*
 
@@ -138,3 +150,4 @@ int main(int argc, char* argv[]){
 		return EXIT_SUCCESS;
 }
 */
+
