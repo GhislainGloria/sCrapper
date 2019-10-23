@@ -23,5 +23,8 @@ int addTask(ControllerTask *controllerTask, Task *task);
 
 void delControllerTask(ControllerTask *controllerTask);
 
+int *countAction(char *fname1);
+
+void parse(char *fname2);
 
 #endif /* CONTROLLERTASK_H_ */
