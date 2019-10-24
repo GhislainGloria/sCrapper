@@ -15,7 +15,7 @@ char *getAction(char *param_name, int number)
     int i = 0;
     int end = 1;
     int num = 0;
-    fp = fopen("../files/param.sconf", "r");
+    fp = fopen("files/param.sconf", "r");
     if (name != NULL && fp != NULL)
     {
         param = malloc(sizeof(char) * 2550);
@@ -67,6 +67,7 @@ char *getAction(char *param_name, int number)
     }
     else
     {
+        printf("Fichier de configuration introuvable \n");
         return NULL;
     }
     free(param);
