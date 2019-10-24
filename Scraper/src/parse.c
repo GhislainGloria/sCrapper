@@ -1,4 +1,4 @@
-#include "define.h"
+#include "parse.h"
 /**
  Fonction pour r�cuperer les action c'est a dire le nom de l'action et son url.
  number = permet de recuperer le num�ro de l'action

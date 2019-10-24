@@ -3,7 +3,7 @@
 #include <winsock.h>
 #include <string.h>
 #include <time.h>
-#include "define.h"
+#include "parse.h"
 
 int main()
 {
