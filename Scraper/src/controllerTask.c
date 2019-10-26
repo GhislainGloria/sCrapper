@@ -89,10 +89,17 @@ int *countAction(char *fname1){
 
 
 void parse(char *fname2){
+    int number = 0;
 	int *pointerOnNbrAction = countAction(fname2);
 	printf("LIGNES %d\n",*pointerOnNbrAction);
 	FILE *f = fopen(fname2, "r");
 	if(f != NULL){
+	    while(number != *pointerOnNbrAction)
+        {
+
+        }
+
+	}
 		printf("File opened\n");
 	}
 	fclose(f);
