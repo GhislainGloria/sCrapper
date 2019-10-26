@@ -1,31 +1,21 @@
 #include "parse.h"
-/**
- Fonction pour r�cuperer les action c'est a dire le nom de l'action et son url.
- number = permet de recuperer le num�ro de l'action
- param_name permet de savoir ce que vont r�cuperer ,c'est a dire le nom de l'action ou l'url.
 
- **/
-char *getAction(char *param_name, int number)
+char *getAction(char *param_name, int number, FILE * fp)
 {
-    FILE *fp;
     char line[10000];
-    char *name = malloc(sizeof(char) * 255);
     char *param;
     char param_temp[25];
     int i = 0;
     int end = 1;
     int num = 0;
-    fp = fopen("files/param.sconf", "r");
-    if (name != NULL && fp != NULL)
+    if (param_name != NULL && fp != NULL)
     {
         param = malloc(sizeof(char) * 2550);
-        name = param_name;
-        printf(" name  :  %s \n ", name);
-
+       // printf(" name  :  %s \n ", param_name);
         while (fgets(line, 255, fp) != NULL)
         {
 
-            if ((strstr(line, name) != NULL) && strchr(line, '>'))
+            if ((strstr(line, param_name) != NULL) && strchr(line, '>'))
             {
                 printf(" num =   %d \n ", num);
 
@@ -38,7 +28,6 @@ char *getAction(char *param_name, int number)
                 {
                     while (end)
                     {
-
                         if (param[i] == '}')
                         {
                             param_temp[i] = '\0';
@@ -53,7 +42,6 @@ char *getAction(char *param_name, int number)
                 }
                 if (num == number)
                 {
-
                     free(param);
                     char *param;
                     param = malloc(sizeof(char) * (strlen(param_temp) + 2));
@@ -73,4 +61,41 @@ char *getAction(char *param_name, int number)
     free(param);
     free(name);
     fclose(fp);
+}
+
+int countActionOption(int number, FILE * fp)
+{
+    char line[255];
+    int numberAction = 0;
+    int totalOption = 0;
+    char * temp;
+    char * currentLine = malloc(sizeof(char)*500);
+    temp = malloc(sizeof(char)*255);
+    if(fp != NULL && temp != NULl )
+    {
+        while (fgets(line, 255, fp) != NULL)
+        {
+            temp = strchr(line,'=');
+            if(strchr(line,'=') != NULL && temp[1] == '=')
+            {
+               if(numberAction == number)
+               {
+                    currentLine = fgets(line,255,fp);
+                    while(strchr(currentLine,'=') == NULL && strchr(currentLine,'+') == NULL)
+                    {
+                        totalOption++;
+                    }
+               }
+                numberAction++;
+            }
+
+        }
+    }
+    else
+    {
+        return NULL;
+    }
+    free(temp);
+    free(currentLine);
+    return totalOption;
 }
