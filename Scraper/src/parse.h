@@ -3,8 +3,8 @@
 #include <winsock.h>
 #include <string.h>
 #include <time.h>
-char *getAction(char *, int, FILE * );
-int countActionOption(int , FILE * );
+char *getAction(char *, int, char * );
+int countActionOption(int , char * );
 /**
 typedef struct Action
 {
