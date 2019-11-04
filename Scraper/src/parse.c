@@ -1,6 +1,7 @@
 #include "parse.h"
 
 char *getAction(char *param_name, int number, char * fpp)
+char *getAction(char *param_name, int number, FILE * fp)
 {
     char line[10000];
     char *param;
@@ -19,6 +20,7 @@ char *getAction(char *param_name, int number, char * fpp)
             if ((strstr(line, param_name) != NULL) && strchr(line, '>'))
             {
                 //printf(" num =   %d \n ", num);
+                printf(" num =   %d \n ", num);
 
                 if (num == number)
                 {
@@ -48,6 +50,7 @@ char *getAction(char *param_name, int number, char * fpp)
                     param = malloc(sizeof(char) * (strlen(param_temp) + 2));
                     strcpy(param, param_temp);
                     //printf(" param : %s \n ", param);
+                    printf(" param : %s \n ", param);
                     return param;
                 }
                 num++;
@@ -65,6 +68,15 @@ char *getAction(char *param_name, int number, char * fpp)
 }
 
 int countActionOption(int number, char * fpp)
+        printf("Fichier de configuration introuvable \n");
+        return NULL;
+    }
+    free(param);
+    free(name);
+    fclose(fp);
+}
+
+int countActionOption(int number, FILE * fp)
 {
     char line[255];
     int numberAction = 0;
@@ -93,6 +105,27 @@ int countActionOption(int number, char * fpp)
                 }
                 numberAction++;
             }
+    char * temp;
+    char * currentLine = malloc(sizeof(char)*500);
+    temp = malloc(sizeof(char)*255);
+    if(fp != NULL && temp != NULl )
+    {
+        while (fgets(line, 255, fp) != NULL)
+        {
+            temp = strchr(line,'=');
+            if(strchr(line,'=') != NULL && temp[1] == '=')
+            {
+               if(numberAction == number)
+               {
+                    currentLine = fgets(line,255,fp);
+                    while(strchr(currentLine,'=') == NULL && strchr(currentLine,'+') == NULL)
+                    {
+                        totalOption++;
+                    }
+               }
+                numberAction++;
+            }
+
         }
     }
     else

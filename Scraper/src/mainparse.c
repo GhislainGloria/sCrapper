@@ -18,6 +18,10 @@
 int main()
 {
     int count = 1;
+
+int main()
+{
+    int count = 0;
     char *testurl;
     char *testname;
     testurl = malloc(sizeof(char) * 255);
@@ -100,3 +104,9 @@ int main(){
 	return 0;
 }
 
+    testname = getAction("name", count);
+    testurl = getAction("url", count);
+    printf(" \n Url : %s", testurl);
+    printf("\n name : %s", testname);
+    return 0;
+}
