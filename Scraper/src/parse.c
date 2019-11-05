@@ -18,36 +18,14 @@ char *getAction(char *param_name, int number, char *fpp)
 
             if ((strstr(line, param_name) != NULL) && strchr(line, '>'))
             {
-                printf(" num =   %d \n ", num);
-
                 if (num == number)
                 {
                     strcpy(param, (strchr(line, '>') + 2));
                 }
 
-                if (strchr(param, '}') && num == number)
-                {
-                    while (end)
-                    {
-                        if (param[i] == '}')
-                        {
-                            param_temp[i] = '\0';
-                            end = 0;
-                        }
-                        else
-                        {
-                            param_temp[i] = param[i];
-                        }
-                        i++;
-                    }
-                }
                 if (num == number)
                 {
-                    free(param);
-                    char *param;
-                    param = malloc(sizeof(char) * (strlen(param_temp) + 2));
-                    strcpy(param, param_temp);
-                    printf(" param : %s \n ", param);
+                    strcpy(param, removeEnd(param));
                     return param;
                 }
                 num++;
