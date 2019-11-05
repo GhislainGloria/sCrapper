@@ -4,9 +4,6 @@ char *getAction(char *param_name, int number, char *fpp)
 {
     char line[10000];
     char *param;
-    char param_temp[25];
-    int i = 0;
-    int end = 1;
     int num = 0;
     FILE *fp = fopen(fpp, "r");
     if (param_name != NULL && fp != NULL)
