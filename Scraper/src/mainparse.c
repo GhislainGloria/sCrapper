@@ -79,7 +79,7 @@ int main(){
 	}
 
 	delTabAllAction(tabAllAction,countAction);
-
+	printf("FINISH");
 	return 0;
 }
 
