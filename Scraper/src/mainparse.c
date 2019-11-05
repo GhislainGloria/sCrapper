@@ -12,25 +12,8 @@
 
 
 
-/*
 
-
-int main()
-{
-    int count = 1;
-    char *testurl;
-    char *testname;
-    testurl = malloc(sizeof(char) * 255);
-    testname = malloc(sizeof(char) * 255);
-    testname = getAction("name", count,"files/param.sconf");
-    testurl = getAction("url", count,"files/param.sconf");
-    printf("Url : %s\n", testurl);
-    printf("name : %s\n", testname);
-    return 0;
-}
-*/
-
-int countNAction(char *fpp){
+int countAllAction(char *fpp){
 	int count = 0;
 	FILE * fp = fopen(fpp,"r");
 	fseek(fp,0,SEEK_SET);
@@ -82,7 +65,7 @@ void delTabAllAction(Action **tab, int tabLength){
 int main(){
 	char *fileName = "files/param.sconf";
 
-	int countAction = countNAction(fileName);
+	int countAction = countAllAction(fileName);
 	printf("Il y a %d actions\n",countAction);
 	printf("\n");
 
@@ -99,4 +82,10 @@ int main(){
 
 	return 0;
 }
+
+
+
+
+
+
 
