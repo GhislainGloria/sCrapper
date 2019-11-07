@@ -1,19 +1,19 @@
 #include "parse.h"
 
-char *getAction(char *param_name, int number, char *fpp)
+char *getAction(char *paramName, int number, char *fpp)
 {
     char line[10000];
     char *param;
     int num = 0;
     FILE *fp = fopen(fpp, "r");
-    if (param_name != NULL && fp != NULL)
+    if (paramName != NULL && fp != NULL)
     {
         param = malloc(sizeof(char) * 2550);
-        // printf(" name  :  %s \n ", param_name);
+        // printf(" name  :  %s \n ", paramName);
         while (fgets(line, 255, fp) != NULL)
         {
 
-            if ((strstr(line, param_name) != NULL) && strchr(line, '>'))
+            if ((strstr(line, paramName) != NULL) && strchr(line, '>'))
             {
                 if (num == number)
                 {
@@ -87,11 +87,11 @@ void GetOption(int number, char **option1, char **option2, char **option3, char 
     {
         while (fgets(line, 500, fp) != NULL)
         {
-            checkOption("{option1", &numberOption, number, option1, line);
-            checkOption("{option2", &numberOption, number, option2, line);
-            checkOption("{option3", &numberOption, number, option3, line);
-            checkOption("{option4", &numberOption, number, option4, line);
-            checkOption("{option5", &numberOption, number, option5, line);
+            checkOption("option1", &numberOption, number, option1, line);
+            checkOption("option2", &numberOption, number, option2, line);
+            checkOption("option3", &numberOption, number, option3, line);
+            checkOption("option4", &numberOption, number, option4, line);
+            checkOption("option5", &numberOption, number, option5, line);
         }
     }
     strcpy(*option1, removeEnd(*option1));
@@ -112,7 +112,6 @@ char **checkOption(char *compare, int *numberOption, int number, char **option, 
                 strcpy(*option, strchr(line, '>') + 1);
             }
         }
-        printf(" ici :  %s \n ", *option);
 
         (*numberOption)++;
         return option;
@@ -126,7 +125,7 @@ char *removeEnd(char *temp)
     int i = 0;
     while (end)
     {
-        if (temp[i] == '}')
+        if (temp[i] == '}' || i == strlen(temp))
         {
             finalStr[i] = '\0';
             end = 0;
@@ -138,4 +137,42 @@ char *removeEnd(char *temp)
         i++;
     }
     return finalStr;
+}
+char *getTaskInfo(char * paramName, int number, char * fileName)
+{
+    char line[1000];
+    int count = 0;
+    char * myParam;
+    myParam = malloc(sizeof(char)*255);
+    FILE * fp = fopen(fileName,"r");
+    if(fp != NULL && paramName != NULL && myParam != NULL)
+    {
+        while (fgets(line,255,fp)!= NULL)
+        {
+            if( line[0] == '=' && line[1] == '=')
+            {
+                if(count == number )
+                {
+                    while (strchr(line,'+') == NULL && strchr(line,'=') == NULL)  
+                    {
+                        if(strstr(line,paramName) != NULL)
+                        {   
+                            strcpy(myParam,strchr(line,'>')+1);
+                        }
+                        fgets(line,255,fp);
+                    }
+                    return removeEnd(myParam);
+                }
+
+                count++;
+            }
+        }
+        
+    }
+    else
+    {
+        printf("Problème de mémoire.");
+        return NULL;
+    }
+    return NULL;
 }
