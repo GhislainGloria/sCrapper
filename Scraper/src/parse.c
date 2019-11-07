@@ -8,7 +8,7 @@ char *getAction(char *paramName, int number, char *fpp)
     FILE *fp = fopen(fpp, "r");
     if (paramName != NULL && fp != NULL)
     {
-        param = malloc(sizeof(char) * 2550);
+        param = malloc(CHAR_SIZE * 2550);
         // printf(" name  :  %s \n ", paramName);
         while (fgets(line, 255, fp) != NULL)
         {
@@ -45,7 +45,7 @@ int countActionOption(int number, char *fpp)
     int numberAction = 0;
     int totalOption = 0;
     char *temp;
-    char *currentLine = malloc(sizeof(char) * 500);
+    char *currentLine = malloc(CHAR_SIZE * 500);
     FILE *fp = fopen(fpp, "r");
     if (fp != NULL && temp != NULL)
     {
@@ -106,7 +106,7 @@ char **checkOption(char *compare, int *numberOption, int number, char **option, 
     {
         if (*numberOption == number)
         {
-            *option = malloc(sizeof(char) * 50);
+            *option = malloc(CHAR_SIZE * 50);
             if (*option != NULL)
             {
                 strcpy(*option, strchr(line, '>') + 1);
@@ -120,7 +120,7 @@ char **checkOption(char *compare, int *numberOption, int number, char **option, 
 }
 char *removeEnd(char *temp)
 {
-    char *finalStr = malloc(sizeof(char) * strlen(temp));
+    char *finalStr = malloc(CHAR_SIZE * strlen(temp));
     int end = 1;
     int i = 0;
     while (end)
@@ -143,7 +143,7 @@ char *getTaskInfo(char * paramName, int number, char * fileName)
     char line[1000];
     int count = 0;
     char * myParam;
-    myParam = malloc(sizeof(char)*255);
+    myParam = malloc(CHAR_SIZE*255);
     FILE * fp = fopen(fileName,"r");
     if(fp != NULL && paramName != NULL && myParam != NULL)
     {
@@ -176,3 +176,49 @@ char *getTaskInfo(char * paramName, int number, char * fileName)
     }
     return NULL;
 }
+char ** explodeInC(char separator, char * str )
+{
+    char *tmp = (char*) malloc(strlen(str));
+    tmp = strcpy(tmp,str);
+    char **finalStr = (char**)malloc(CHARP_SIZE);
+    finalStr[0] = *tmp;
+    int actualSize = 1;
+    int i = 0;
+    while(*tmp!='\0')
+    {
+        if(*tmp == separator)
+        {   //printf("%d \n", ++i);
+            finalStr = (char**)realloc(finalStr,(++actualSize)*CHARP_SIZE);
+            finalStr[actualSize-1] = tmp+1;
+           *tmp = 0;  
+        }
+        tmp++;
+    }
+    return finalStr;
+
+}
+char ** getTaskAction(int number, char * fileName)
+{
+    char ** actionTab;
+    int count=0;
+    actionTab = malloc(sizeof(char)*255);
+
+}
+/**
+char** explode1(const char delimiter, const char* str) {
+	char *p = strcpy((char*)malloc(strlen(str)),str);
+	unsigned int cp_size = sizeof(char*);
+	char **r = (char**)malloc(cp_size);
+	unsigned long j = 1;
+	r[0] = p;
+	while(*p){
+		if(*p == delimiter){
+			r = (char**)realloc(r,(++j)*cp_size);
+			r[j-1] = p+1;
+			*p = 0;
+		}
+		p++;
+	}
+	return r;
+}**/
+

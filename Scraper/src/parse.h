@@ -3,6 +3,9 @@
 #include <winsock.h>
 #include <string.h>
 #include <time.h>
+#define CHARP_SIZE sizeof(char*)
+#define CHAR_SIZE sizeof(char)
+
 char *getAction(char *, int, char * );
 int countActionOption(int , char * );
 void GetOption(int  , char ** , char ** , char **, char ** , char **, char *  );
