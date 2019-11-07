@@ -138,28 +138,28 @@ char *removeEnd(char *temp)
     }
     return finalStr;
 }
-char *getTaskInfo(char * paramName, int number, char * fileName)
+char *getTaskInfo(char *paramName, int number, char *fileName)
 {
     char line[1000];
     int count = 0;
-    char * myParam;
-    myParam = malloc(CHAR_SIZE*255);
-    FILE * fp = fopen(fileName,"r");
-    if(fp != NULL && paramName != NULL && myParam != NULL)
+    char *myParam;
+    myParam = malloc(CHAR_SIZE * 255);
+    FILE *fp = fopen(fileName, "r");
+    if (fp != NULL && paramName != NULL && myParam != NULL)
     {
-        while (fgets(line,255,fp)!= NULL)
+        while (fgets(line, 255, fp) != NULL)
         {
-            if( line[0] == '=' && line[1] == '=')
+            if (line[0] == '=' && line[1] == '=')
             {
-                if(count == number )
+                if (count == number)
                 {
-                    while (strchr(line,'+') == NULL && strchr(line,'=') == NULL)  
+                    while (strchr(line, '+') == NULL && strchr(line, '=') == NULL)
                     {
-                        if(strstr(line,paramName) != NULL)
-                        {   
-                            strcpy(myParam,strchr(line,'>')+1);
+                        if (strstr(line, paramName) != NULL)
+                        {
+                            strcpy(myParam, strchr(line, '>') + 1);
                         }
-                        fgets(line,255,fp);
+                        fgets(line, 255, fp);
                     }
                     return removeEnd(myParam);
                 }
@@ -167,7 +167,6 @@ char *getTaskInfo(char * paramName, int number, char * fileName)
                 count++;
             }
         }
-        
     }
     else
     {
@@ -176,33 +175,61 @@ char *getTaskInfo(char * paramName, int number, char * fileName)
     }
     return NULL;
 }
-char ** explodeInC(char separator, char * str )
+char **explodeInC(char separator, char *str)
 {
-    char *tmp = (char*) malloc(strlen(str));
-    tmp = strcpy(tmp,str);
-    char **finalStr = (char**)malloc(CHARP_SIZE);
+    char *tmp = (char *)malloc(strlen(str));
+    tmp = strcpy(tmp, str);
+    char **finalStr = (char **)malloc(CHARP_SIZE);
     finalStr[0] = *tmp;
     int actualSize = 1;
     int i = 0;
-    while(*tmp!='\0')
+    while (*tmp != '\0')
     {
-        if(*tmp == separator)
-        {   //printf("%d \n", ++i);
-            finalStr = (char**)realloc(finalStr,(++actualSize)*CHARP_SIZE);
-            finalStr[actualSize-1] = tmp+1;
-           *tmp = 0;  
+        if (*tmp == separator)
+        { //printf("%d \n", ++i);
+            finalStr = (char **)realloc(finalStr, (++actualSize) * CHARP_SIZE);
+            finalStr[actualSize - 1] = tmp + 1;
+            *tmp = 0;
         }
         tmp++;
     }
     return finalStr;
-
 }
-char ** getTaskAction(int number, char * fileName)
+char **getTaskAction(int number, char *fileName)
 {
-    char ** actionTab;
-    int count=0;
-    actionTab = malloc(sizeof(char)*255);
-
+    char **actionTab;
+    int count = 0;
+    int isUnder = 0;
+    char line[1000];
+    FILE *fp = fopen(fileName, "r");
+    if (fp != NULL)
+    {
+        while (fgets(line, 255, fp))
+        {
+            if (line[0] == '=' && line[1] == '=')
+            {
+                isUnder = 1;
+            }
+            if (line == '=' && line[1] != '=')
+            {
+                isUnder = 0;
+            }
+            if (isUnder == 1 && strchr(line, '+') != NULL)
+            {
+                fgets(line, 255, fp);
+                if (number == count)
+                {
+                    if (strchr(line, '{') != NULL)
+                    {
+                        actionTab = explodeInC(',', line);
+                        return actionTab;
+                    }
+                }
+                count++;
+            }
+        }
+    }
+    return NULL;
 }
 /**
 char** explode1(const char delimiter, const char* str) {
@@ -221,4 +248,3 @@ char** explode1(const char delimiter, const char* str) {
 	}
 	return r;
 }**/
-
