@@ -3,6 +3,8 @@
 #include <winsock.h>
 #include <string.h>
 #include <time.h>
+
+int countAllAction(char *fpp);
 char *getAction(char *, int, char * );
 int countActionOption(int , char * );
 /**

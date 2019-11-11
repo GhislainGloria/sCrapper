@@ -13,24 +13,6 @@
 
 
 
-int countAllAction(char *fpp){
-	int count = 0;
-	FILE * fp = fopen(fpp,"r");
-	fseek(fp,0,SEEK_SET);
-	char* parcours = fgetc(fp);
-	    if (fp != NULL){
-	    	while(parcours != EOF){
-	    		if(parcours == '='){
-	    			count++;
-	    		}
-	    		parcours = fgetc(fp);
-	    	}
-	    }
-	fclose(fp);
-	return count;
-}
-
-
 Action **createActions(char *fpp, int numberOfAction){
 	Action **tab;
 	for(int i = 0; i<numberOfAction; i++){
@@ -51,6 +33,8 @@ Action **createActions(char *fpp, int numberOfAction){
 }
 
 
+
+
 void delTabAllAction(Action **tab, int tabLength){
 	if(tab == NULL){
 		printf("No tab to free");
@@ -62,6 +46,9 @@ void delTabAllAction(Action **tab, int tabLength){
 
 
 
+
+
+
 int main(){
 	char *fileName = "files/param.sconf";
 
@@ -69,14 +56,18 @@ int main(){
 	printf("Il y a %d actions\n",countAction);
 	printf("\n");
 
+
 	Action **tabAllAction = malloc(sizeof(Action*)*countAction);
 	tabAllAction = createActions(fileName,countAction);
+
 
 	for(int i = 0; i<countAction;i++){
 		printf("Cette action s'appelle%s\n",tabAllAction[i]->name);
 		printf("Son url est %s\n",tabAllAction[i]->url);
+		printf("L'action a %d options\n",countActionOption(i,fileName));
 		printf("\n");
 	}
+
 
 	delTabAllAction(tabAllAction,countAction);
 	printf("FINISH");

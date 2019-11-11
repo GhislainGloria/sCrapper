@@ -7,18 +7,11 @@
 {option3 -> 5}
 {option3 -> 5}
 {option3 -> 5}
-
-
+{option3 -> 5}
 =
 {name -> Mon Site Web2}
 {url -> value2}
 +
-{option1 -> 3}
-{option2 -> 4}
-{option3 -> 5}
-
-
-
 =
 {name -> Mon Site Web3}
 {url -> value3}
@@ -26,5 +19,10 @@
 {option1 -> 3}
 {option2 -> 4}
 {option3 -> 5}
+
+
+
+
+
 
 

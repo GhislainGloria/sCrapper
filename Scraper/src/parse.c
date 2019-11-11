@@ -1,5 +1,25 @@
 #include "parse.h"
 
+
+
+int countAllAction(char *fpp){
+	int count = 0;
+	FILE * fp = fopen(fpp,"r");
+	fseek(fp,0,SEEK_SET);
+	char* parcours = fgetc(fp);
+	    if (fp != NULL){
+	    	while(parcours != EOF){
+	    		if(parcours == '='){
+	    			count++;
+	    		}
+	    		parcours = fgetc(fp);
+	    	}
+	    }
+	fclose(fp);
+	return count;
+}
+
+
 char *getAction(char *param_name, int number, char * fpp)
 {
     char line[10000];
@@ -9,6 +29,7 @@ char *getAction(char *param_name, int number, char * fpp)
     int end = 1;
     int num = 0;
     FILE * fp = fopen(fpp,"r");
+    fseek(fp,0,SEEK_SET);
     if (param_name != NULL && fp != NULL)
     {
         param = malloc(sizeof(char) * 2550);
@@ -61,8 +82,51 @@ char *getAction(char *param_name, int number, char * fpp)
         //printf("Fichier de configuration introuvable \n");
         return NULL;
     }
-    free(param);
     fclose(fp);
     return NULL;
+}
+
+
+
+
+
+int countActionOption(int number, char *fpp)
+{
+	char line[255];
+    int numberAction = 0;
+    int totalOption = 0;
+    char *temp;
+    char *currentLine = malloc(sizeof(char) * 500);
+    FILE *fp = fopen(fpp, "r");
+    fseek(fp,0,SEEK_SET);
+    if (fp != NULL && temp != NULL)
+    {
+        while (fgets(line, 255, fp) != NULL )
+        {
+        	if (strstr(line, "+"))
+            {
+                if (numberAction == number)
+                {
+
+                    currentLine = fgets(line, 255, fp);
+                    while (strchr(currentLine, '=') == NULL && strchr(currentLine, '+') == NULL && currentLine[1] != NULL )
+                    {
+
+                        totalOption++;
+                        currentLine = fgets(line, 255, fp);
+                    }
+                }
+
+                numberAction++;
+
+            }
+        }
+    }
+    else
+    {
+    	return 0;
+    }
+    fclose(fp);
+    return totalOption;
 }
 
