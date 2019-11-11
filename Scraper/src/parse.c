@@ -3,6 +3,7 @@
 
 
 int countAllAction(char *fpp){
+	char line[255];
 	int count = 0;
 	FILE * fp = fopen(fpp,"r");
 	fseek(fp,0,SEEK_SET);
@@ -10,7 +11,33 @@ int countAllAction(char *fpp){
 	    if (fp != NULL){
 	    	while(parcours != EOF){
 	    		if(parcours == '='){
+	    			parcours = fgetc(fp);
+	    			if(parcours != '='){
 	    			count++;
+	    			}
+	    		}
+	    		parcours = fgetc(fp);
+	    	}
+	    }
+	fclose(fp);
+	return count;
+}
+
+
+
+int countAllTask(char *fpp){
+	char line[255];
+	int count = 0;
+	FILE * fp = fopen(fpp,"r");
+	fseek(fp,0,SEEK_SET);
+	char* parcours = fgetc(fp);
+	    if (fp != NULL){
+	    	while(parcours != EOF){
+	    		if(parcours == '='){
+	    			parcours = fgetc(fp);
+	    			if(parcours == '='){
+	    			count++;
+	    			}
 	    		}
 	    		parcours = fgetc(fp);
 	    	}

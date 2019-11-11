@@ -5,6 +5,7 @@
 #include <time.h>
 
 int countAllAction(char *fpp);
+int countAllTask(char *fpp);
 char *getAction(char *, int, char * );
 int countActionOption(int , char * );
 /**

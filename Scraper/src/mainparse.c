@@ -51,25 +51,31 @@ void delTabAllAction(Action **tab, int tabLength){
 
 int main(){
 	char *fileName = "files/param.sconf";
+	int countTotalAction = 0;
+	int countTotalTask = 0;
 
-	int countAction = countAllAction(fileName);
-	printf("Il y a %d actions\n",countAction);
+	countTotalAction = countAllAction(fileName);
+	printf("Il y a %d actions\n",	countTotalAction);
+	printf("\n");
+
+	countTotalTask = countAllTask(fileName);
+	printf("Il y a %d tâches\n",	countTotalTask);
 	printf("\n");
 
 
-	Action **tabAllAction = malloc(sizeof(Action*)*countAction);
-	tabAllAction = createActions(fileName,countAction);
+	Action **tabAllAction = malloc(sizeof(Action*)*	countTotalAction);
+	tabAllAction = createActions(fileName,	countTotalAction);
 
 
-	for(int i = 0; i<countAction;i++){
-		printf("Cette action s'appelle%s\n",tabAllAction[i]->name);
+	for(int i = 0; i<countTotalAction;i++){
+		printf("Cette action s'appelle %s\n",tabAllAction[i]->name);
 		printf("Son url est %s\n",tabAllAction[i]->url);
 		printf("L'action a %d options\n",countActionOption(i,fileName));
 		printf("\n");
 	}
 
 
-	delTabAllAction(tabAllAction,countAction);
+	delTabAllAction(tabAllAction,countTotalAction);
 	printf("FINISH");
 	return 0;
 }
