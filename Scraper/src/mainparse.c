@@ -18,19 +18,42 @@ Action **createActions(char *fpp, int numberOfAction){
 	for(int i = 0; i<numberOfAction; i++){
 		Action *action = initAction();
 
-		char *name = malloc(sizeof(char) * 255);
-		char *url = malloc(sizeof(char) * 255);
+		char *nameAction = malloc(sizeof(char) * 255);
+		char *urlAction = malloc(sizeof(char) * 255);
 
-		name = getAction("name", i,"files/param.sconf");
-		url = getAction("url", i,"files/param.sconf");
+		nameAction = getAction("name", i,"files/param.sconf");
+		urlAction = getAction("url", i,"files/param.sconf");
 
-		addNameAction(action,name);
-		addUrl(action,url);
+		addNameAction(action,nameAction);
+		addUrl(action,urlAction);
 		tab[i] = action;
 	}
 	return tab;
 
 }
+
+
+
+
+Task **createTasks(char *fpp,int numberOfTask){
+	Task **tabl;
+	for(int i = 0;i<numberOfTask;i++){
+		Task *task = initTask();
+
+		char *nameTask = malloc(sizeof(char) * 255);
+
+		nameTask = getTaskInfo("name",i,"files/param.sconf");
+
+		addNameTask(task,nameTask);
+		tabl[i] = task;
+	}
+	return tabl;
+}
+
+
+
+
+
 
 
 
@@ -48,19 +71,29 @@ void delTabAllAction(Action **tab, int tabLength){
 
 
 
+void delTabAllTask(Task **tab){
+	if(tab == NULL){
+		printf("No tab to free");
+	}
+	free(tab);
+
+}
+
+
+
+
 
 int main(){
+
 	char *fileName = "files/param.sconf";
 	int countTotalAction = 0;
 	int countTotalTask = 0;
 
+//A   C   T   I   O    N
 	countTotalAction = countAllAction(fileName);
-	printf("Il y a %d actions\n",	countTotalAction);
+	printf("Il y a %d actions au total\n",	countTotalAction);
 	printf("\n");
 
-	countTotalTask = countAllTask(fileName);
-	printf("Il y a %d tâches\n",	countTotalTask);
-	printf("\n");
 
 
 	Action **tabAllAction = malloc(sizeof(Action*)*	countTotalAction);
@@ -75,8 +108,25 @@ int main(){
 	}
 
 
+//T   A   S   K
+	countTotalTask = countAllTask(fileName);
+	printf("Il y a %d tâches au total\n",	countTotalTask);
+	printf("\n");
+
+
+	Task **tabAllTask = malloc(sizeof(Task*)* countTotalTask);
+	tabAllTask = createTasks(fileName, countTotalTask);
+
+	for(int i = 0; i<countTotalTask;i++){
+			printf("Cette tâche s'appelle %s\n",tabAllAction[i]->name);
+			printf("\n");
+	}
+
+
+//F   R   E   E
+
 	delTabAllAction(tabAllAction,countTotalAction);
-	printf("FINISH");
+	delTabAllTask(tabAllTask);
 	return 0;
 }
 

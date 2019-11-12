@@ -157,3 +157,69 @@ int countActionOption(int number, char *fpp)
     return totalOption;
 }
 
+
+
+char *removeEnd(char *temp)
+{
+    char *removedStr = malloc(CHAR_SIZE * strlen(temp));
+    int end = 1;
+    int i = 0;
+    while (end)
+    {
+        if (temp[i] == '}' || i == strlen(temp))
+        {
+            removedStr[i] = '\0';
+            end = 0;
+        }
+        else
+        {
+            removedStr[i] = temp[i];
+        }
+        i++;
+    }
+    return removedStr;
+}
+
+
+char *getTaskInfo(char *paramNameT, int number, char *fileName)
+{
+    char line[1000];
+    int count = 0;
+    char *myParam;
+    myParam = malloc(CHAR_SIZE * 255);
+    FILE *fp = fopen(fileName, "r");
+    if (fp != NULL && paramNameT != NULL && myParam != NULL)
+    {
+        while (fgets(line, 255, fp) != NULL)
+        {
+            if (line[0] == '=' && line[1] == '=')
+            {
+                if (count == number)
+                {
+
+                    while (strchr(line, '+') == NULL )//&& strchr(line, '=') == NULL)
+                    {
+
+                        if (strstr(line, paramNameT) != NULL)
+                        {
+                        	strcpy(myParam, strchr(line, '>') + 1);
+                        }
+                        fgets(line, 255, fp);
+                    }
+                    return removeEnd(myParam);
+                }
+
+                count++;
+            }
+        }
+    }
+    else
+    {
+        printf("Problème de mémoire.");
+        return NULL;
+    }
+    return NULL;
+}
+
+
+
