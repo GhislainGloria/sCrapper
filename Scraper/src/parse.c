@@ -120,32 +120,32 @@ char **checkOption(char *compare, int *numberOption, int number, char **option, 
 }
 char *removeEnd(char *temp)
 {
-    char *finalStr = malloc(CHAR_SIZE * strlen(temp));
+    char *removedStr = malloc(CHAR_SIZE * strlen(temp));
     int end = 1;
     int i = 0;
     while (end)
     {
         if (temp[i] == '}' || i == strlen(temp))
         {
-            finalStr[i] = '\0';
+            removedStr[i] = '\0';
             end = 0;
         }
         else
         {
-            finalStr[i] = temp[i];
+            removedStr[i] = temp[i];
         }
         i++;
     }
-    return finalStr;
+    return removedStr;
 }
 char *getTaskInfo(char *paramName, int number, char *fileName)
 {
     char line[1000];
     int count = 0;
-    char *myParam;
-    myParam = malloc(CHAR_SIZE * 255);
+    char *myParamT;
+    myParamT = malloc(CHAR_SIZE * 255);
     FILE *fp = fopen(fileName, "r");
-    if (fp != NULL && paramName != NULL && myParam != NULL)
+    if (fp != NULL && paramName != NULL && myParamT != NULL)
     {
         while (fgets(line, 255, fp) != NULL)
         {
@@ -157,11 +157,11 @@ char *getTaskInfo(char *paramName, int number, char *fileName)
                     {
                         if (strstr(line, paramName) != NULL)
                         {
-                            strcpy(myParam, strchr(line, '>') + 1);
+                            strcpy(myParamT, strchr(line, '>') + 1);
                         }
                         fgets(line, 255, fp);
                     }
-                    return removeEnd(myParam);
+                    return removeEnd(myParamT);
                 }
 
                 count++;
@@ -179,21 +179,21 @@ char **explodeInC(char separator, char *str)
 {
     char *tmp = (char *)malloc(strlen(str));
     tmp = strcpy(tmp, str);
-    char **finalStr = (char **)malloc(CHARP_SIZE);
-    finalStr[0] = *tmp;
+    char **explodeStr = (char **)malloc(CHARP_SIZE);
+    explodeStr[0] = *tmp;
     int actualSize = 1;
     int i = 0;
     while (*tmp != '\0')
     {
         if (*tmp == separator)
         { //printf("%d \n", ++i);
-            finalStr = (char **)realloc(finalStr, (++actualSize) * CHARP_SIZE);
-            finalStr[actualSize - 1] = tmp + 1;
+            explodeStr = (char **)realloc(explodeStr, (++actualSize) * CHARP_SIZE);
+            explodeStr[actualSize - 1] = tmp + 1;
             *tmp = 0;
         }
         tmp++;
     }
-    return finalStr;
+    return explodeStr;
 }
 char **getTaskAction(int number, char *fileName)
 {
