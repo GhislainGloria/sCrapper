@@ -1,7 +1,7 @@
 #include "parse.h"
 
 
-
+//COMPTE LE NOMBRE TOTAL D'ACTION DANS LE FICHIER DE CONFIG
 int countAllAction(char *fpp){
 	char line[255];
 	int count = 0;
@@ -24,7 +24,7 @@ int countAllAction(char *fpp){
 }
 
 
-
+//COMPTE LE NOMBRE TOTAL DE TACHE DANS LE FICHIER DE CONFIG
 int countAllTask(char *fpp){
 	char line[255];
 	int count = 0;
@@ -47,6 +47,8 @@ int countAllTask(char *fpp){
 }
 
 
+//RECUPERE LA VALEUR DE L'ACTION SELON SON KEY ET SON NUMERO
+//KEY = name et url
 char *getAction(char *param_name, int number, char * fpp)
 {
     char line[10000];
@@ -116,7 +118,7 @@ char *getAction(char *param_name, int number, char * fpp)
 
 
 
-
+//COMPTE LE NOMBRE D'OPTION POUR UNE ACTION
 int countActionOption(int number, char *fpp)
 {
 	char line[255];
@@ -181,9 +183,13 @@ char *removeEnd(char *temp)
 }
 
 
+//RECUPERE LA VALEUR DE LA TACHE SELON SON KEY ET SON NUMERO
+//KEY = name et hour et minute et second
 char *getTaskInfo(char *paramNameT, int number, char *fileName)
 {
-    char line[1000];
+    //int total = countTaskCriterion(number,fileName);
+    char indic = NULL;
+	char line[1000];
     int count = 0;
     char *myParam;
     myParam = malloc(CHAR_SIZE * 255);
@@ -220,6 +226,56 @@ char *getTaskInfo(char *paramNameT, int number, char *fileName)
     }
     return NULL;
 }
+
+
+
+
+//COMPTE LE NOMBRE DE CRITERE DANS UNE TACHE
+int countTaskCriterion(int number, char *fpp)
+{
+    int totalAct = countAllAction(fpp);
+	char line[255];
+    int numberTask = 0;
+    int numberAct = 0;
+    int totalOption = 0;
+    char *temp;
+    char *currentLine = malloc(CHAR_SIZE * 500);
+    FILE *fp = fopen(fpp, "r");
+    if (fp != NULL && temp != NULL)
+    {
+        while (fgets(line, 255, fp) != NULL)
+        {
+            if (strstr(line, "name"))
+            {
+            	numberAct++;
+            	if(numberAct > totalAct){
+							if (numberTask == number)
+							{
+
+								currentLine = fgets(line, 255, fp);
+								while (/*strchr(currentLine, '=') == NULL &&*/ strchr(currentLine, '+') == NULL)
+
+								{
+									totalOption++;
+									//printf("total : %d \n ", totalOption);
+
+									currentLine = fgets(line, 255, fp);
+								}
+							}
+
+							numberTask++;
+            	}
+            }
+        }
+    }
+    else
+    {
+        return 0;
+    }
+    return totalOption;
+}
+
+
 
 
 

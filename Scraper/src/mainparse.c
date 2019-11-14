@@ -41,10 +41,22 @@ Task **createTasks(char *fpp,int numberOfTask){
 		Task *task = initTask();
 
 		char *nameTask = malloc(sizeof(char) * 255);
+		//char * h =  malloc(sizeof(char) * 255);
+		//char * m = malloc(sizeof(char) * 255);
+		//char * s =  malloc(sizeof(char) * 255);
+ 		nameTask = getTaskInfo("name",i,"files/param.sconf");
+ 		//h = getTaskInfo("hour",i,"files/param.sconf");
+ 		//m = getTaskInfo("minute",i,"files/param.sconf");
+ 		//s = getTaskInfo("second",i,"files/param.sconf");
 
-		nameTask = getTaskInfo("name",i,"files/param.sconf");
+ 		//Criterion *criterion = initCriterion();
+ 		//addHour(criterion,h);
+ 		//addMinute(criterion,m);
+ 		//addSecond(criterion,s);
 
 		addNameTask(task,nameTask);
+		//addCriterion(task,criterion);
+
 		tabl[i] = task;
 	}
 	return tabl;
@@ -118,7 +130,11 @@ int main(){
 	tabAllTask = createTasks(fileName, countTotalTask);
 
 	for(int i = 0; i<countTotalTask;i++){
-			printf("Cette tâche s'appelle %s\n",tabAllAction[i]->name);
+			printf("Cette tâche s'appelle %s\n",tabAllTask[i]->name);
+			printf(" Les critères de la taches sont\n");
+			//printf("  Heure : %s",tabAllTask[i]->criterion->hour);
+			//printf("  Minute : %s",tabAllTask[i]->criterion->minute);
+			//printf("  Second : %s",tabAllTask[i]->criterion->second);
 			printf("\n");
 	}
 

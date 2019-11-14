@@ -8,10 +8,20 @@
 
 int countAllAction(char *fpp);
 int countAllTask(char *fpp);
-char *getAction(char *, int, char * );
+
 int countActionOption(int , char * );
-char * removeEnd(char * );
+int countTaskCriterion(int number, char *fpp);
 char *getTaskInfo(char *paramName, int number, char *fileName);
+char *getAction(char *, int, char * );
+char * removeEnd(char * );
+
+
+/*
+char ** explodeInC(char separator, char * str );
+char ** getTaskAction(int number, char * fileName);
+*/
+
+
 /**
 typedef struct Action
 {
