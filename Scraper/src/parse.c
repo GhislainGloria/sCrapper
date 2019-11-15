@@ -171,7 +171,7 @@ char **explodeInC(char separator, char *str){
     int actualSize = 1;
     int i = 0;
     while (*tmp != '\0'){
-        if (*tmp == separator){ 
+        if (*tmp == separator){
             finalStr = (char **)realloc(finalStr, (++actualSize) * CHARP_SIZE);
             finalStr[actualSize - 1] = tmp + 1;
             *tmp = 0;

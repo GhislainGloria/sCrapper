@@ -16,7 +16,8 @@ int main(int argc, char *argv[])
     char * option4= malloc(sizeof(char)*50);;
     char * option5= malloc(sizeof(char)*50);;
     int number = 0;
-    GetOption(number, option1, option2,  option3, option4, option5, file );
+    GetOption(number, &option1, &option2,  &option3, &option4, &option5, file );
+    printf("%s",option1);
     return 0;
 }
 
