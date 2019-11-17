@@ -57,34 +57,36 @@ int countActionOption(int number, char *fpp)
     return totalOption;
 }
 
-void GetOption(int number, char **option1, char **option2, char **option3, char **option4, char **option5, char *file){
+void GetOption(int number, char **option1, char **option2, char **option3,  char *file){
     char line[1000];
     int numberOption = 0;
     FILE *fp = fopen(file, "r");
     if (fp != NULL){
         while (fgets(line, 500, fp) != NULL){
-            if(checkOption("option1", &numberOption, number, option1, line)!= NULL){
-                strcpy(*option1,checkOption("option1", &numberOption, number, option1, line));
+            if (checkOption("max-depth", &numberOption, number, option1, line) != NULL)
+            {
+                strcpy(*option1, checkOption("max-depth", &numberOption, number, option1, line));
+                if(!isInt(*option1[0]))
+                {
+                 writeLogs("Valeur de max-depth incorrecte","erreur.logs");
+
+                }
             }
-            else if(checkOption("option2", &numberOption, number, option2, line)!= NULL ){
-                strcpy(*option2,checkOption("option2", &numberOption, number, option2, line));
+            else if (checkOption("versioning", &numberOption, number, option2, line) != NULL)
+            {
+                strcpy(*option2, checkOption("versioning", &numberOption, number, option2, line));
+                if(isTurn(*option2)){
+                    writeLogs("Valeur de l'option versioning incorrecte","erreur.logs");
+
+                }
             }
-            else if(checkOption("option3", &numberOption, number, option3, line)!= NULL ){
-                strcpy(*option3,checkOption("option3", &numberOption, number, option3, line));
+            else if (checkOption("type", &numberOption, number, option3, line) != NULL)
+            {
+                strcpy(*option3, checkOption("type", &numberOption, number, option3, line));
             }
-            else if(checkOption("option4", &numberOption, number, option4, line)!= NULL ){
-                strcpy(*option4,checkOption("option4", &numberOption, number, option4, line));
-            }
-            else if(checkOption("option5", &numberOption, number, option5, line)!= NULL){
-                strcpy(*option5,checkOption("option5", &numberOption, number, option5, line));
-            }
+
         }
     }
-    // Ici on peut mettre notre attribution des options (structure etc.. )
-    /**
-     * En gros on on crée nos options ici comme ça c'est plus simple pour toi
-     * Sinon il suffit juste de les recup apres la sortie de getOption ctoi qu vois comment tu geres ça !
-     * */
     if(*option1){
         strcpy(*option1, removeEnd(*option1));
     }
@@ -94,12 +96,7 @@ void GetOption(int number, char **option1, char **option2, char **option3, char 
     else if (*option3){
         strcpy(*option3, removeEnd(*option3));
     }
-    else if (*option4){
-        strcpy(*option4, removeEnd(*option4));
-    }
-    else if(*option5){
-        strcpy(*option5, removeEnd(*option5));
-    }
+
 }
 
 char *checkOption(char *compare, int *numberOption, int number, char **option, char *line){
@@ -208,4 +205,33 @@ char **getTaskAction(int number, char *fileName){
     }
     return NULL;
 }
+bool isInt (char value){
+        return (value > 47 && value<58) ;
+}
+bool isTurn(char * string){
+    return (strstr(string,'on') != NULL || strstr(string,'off') != NULL);
+}
+void writeLogs(char *string, char *fileName)
+{
+    FILE *fp;
+    char *logs = malloc(CHAR_SIZE * strlen(string)+1);
+    logs = strcpy(logs, string);
+    if (logs[strlen(logs) - 1] == '\0')
+    {
+        logs[strlen(logs) - 1] = '\n';
+        logs[strlen(logs)] = '\0';
+    }
+    fp = fopen(fileName, "r+t");
+    if (fp != NULL)
+    {
+        fputs(logs, fp);
+    }
+    else
+    {
+        fp = fopen(fileName, "w+t");
+        fputs(logs, fileName);
 
+    }
+    fclose(fp);
+    free(logs);
+}
