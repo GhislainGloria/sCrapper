@@ -6,12 +6,16 @@ char *getAction(char *paramName, int number, char *fpp)
     char *param;
     int num = 0;
     FILE *fp = fopen(fpp, "r");
-    if (paramName != NULL && fp != NULL){
+    if (paramName != NULL && fp != NULL)
+    {
         param = malloc(CHAR_SIZE * 255);
-        while (fgets(line, 255, fp) != NULL){
+        while (fgets(line, 255, fp) != NULL)
+        {
 
-            if ((strstr(line, paramName) != NULL) && strchr(line, '>')){
-                if (num == number){
+            if ((strstr(line, paramName) != NULL) && strchr(line, '>'))
+            {
+                if (num == number)
+                {
                     strcpy(param, (strchr(line, '>') + 2));
                     strcpy(param, removeEnd(param));
                     return param;
@@ -20,7 +24,8 @@ char *getAction(char *paramName, int number, char *fpp)
             }
         }
     }
-    else{
+    else
+    {
         printf("Fichier de configuration introuvable \n");
         return NULL;
     }
@@ -37,12 +42,17 @@ int countActionOption(int number, char *fpp)
     char *temp;
     char *currentLine = malloc(CHAR_SIZE * 500);
     FILE *fp = fopen(fpp, "r");
-    if (fp != NULL && temp != NULL){
-        while (fgets(line, 255, fp) != NULL){
-            if (strstr(line, "+")){
-                if (numberAction == number){
+    if (fp != NULL && temp != NULL)
+    {
+        while (fgets(line, 255, fp) != NULL)
+        {
+            if (strstr(line, "+"))
+            {
+                if (numberAction == number)
+                {
                     currentLine = fgets(line, 255, fp);
-                    while (strchr(currentLine, '=') == NULL && strchr(currentLine, '+') == NULL){
+                    while (strchr(currentLine, '=') == NULL && strchr(currentLine, '+') == NULL)
+                    {
                         totalOption++;
                         currentLine = fgets(line, 255, fp);
                     }
@@ -51,60 +61,83 @@ int countActionOption(int number, char *fpp)
             }
         }
     }
-    else{
+    else
+    {
         return 0;
     }
     return totalOption;
 }
 
-void GetOption(int number, char **option1, char **option2, char **option3,  char *file){
+void GetOption(int number, char **option1, char **option2, char **option3,  char *file)
+{
     char line[1000];
-    int numberOption = 0;
+    int numberOption1 = 0;
+    int numberOption2 = 0;
+    int numberOption3 = 0;
     FILE *fp = fopen(file, "r");
-    if (fp != NULL){
-        while (fgets(line, 500, fp) != NULL){
-            if (checkOption("max-depth", &numberOption, number, option1, line) != NULL)
+    if (fp != NULL)
+    {
+        while (fgets(line, 500, fp) != NULL)
+        {
+
+            if (checkOption("option1", &numberOption1, number, option1, line) != NULL)
             {
-                strcpy(*option1, checkOption("max-depth", &numberOption, number, option1, line));
+
+                strcpy(*option1, checkOption("option1", &numberOption1, number, option1, line));
+                numberOption1++;
                 if(!isInt(*option1[0]))
                 {
-                 writeLogs("Valeur de max-depth incorrecte","erreur.logs");
+                    writeLogs("Valeur de max-depth incorrecte","erreur.logs");
 
                 }
             }
-            else if (checkOption("versioning", &numberOption, number, option2, line) != NULL)
+            else if (checkOption("versioning", &numberOption2, number, option2, line) != NULL)
             {
-                strcpy(*option2, checkOption("versioning", &numberOption, number, option2, line));
-                if(isTurn(*option2)){
+                strcpy(*option2, checkOption("versioning", &numberOption2, number, option2, line));
+                numberOption2++;
+
+                if(isTurn(*option2))
+                {
                     writeLogs("Valeur de l'option versioning incorrecte","erreur.logs");
 
                 }
             }
-            else if (checkOption("type", &numberOption, number, option3, line) != NULL)
+            else if (checkOption("type", &numberOption3, number, option3, line) != NULL)
             {
-                strcpy(*option3, checkOption("type", &numberOption, number, option3, line));
+                strcpy(*option3, checkOption("type", &numberOption3, number, option3, line));
+                numberOption3++;
+
             }
 
         }
     }
-    if(*option1){
+    if(*option1)
+    {
         strcpy(*option1, removeEnd(*option1));
     }
-    else if (*option2){
+    else if (*option2)
+    {
         strcpy(*option2, removeEnd(*option2));
     }
-    else if (*option3){
+    else if (*option3)
+    {
         strcpy(*option3, removeEnd(*option3));
     }
 
 }
 
-char *checkOption(char *compare, int *numberOption, int number, char **option, char *line){
-    if (strstr(line, compare)){
-        if (*numberOption == number){
+char *checkOption(char *compare, int *numberOption, int number, char **option, char *line)
+{
+    if (strstr(line, compare))
+    {
+        if (*numberOption == number)
+        {
+            // printf("%s,  \n ", line);
+            // printf("ici");
             option = malloc(CHAR_SIZE * 50);
             *option = malloc(CHAR_SIZE * 50);
-            if (*option != NULL){
+            if (*option != NULL)
+            {
                 strcpy(*option, strchr(line, '>') + 1);
                 return *option;
             }
@@ -114,16 +147,20 @@ char *checkOption(char *compare, int *numberOption, int number, char **option, c
     return NULL;
 }
 
-char *removeEnd(char *temp){
+char *removeEnd(char *temp)
+{
     char *removedStr = malloc(sizeof(char) * strlen(temp));
     int end = 1;
     int i = 0;
-    while (end){
-        if (temp[i] == '}' || i == strlen(temp)){
+    while (end)
+    {
+        if (temp[i] == '}' || i == strlen(temp))
+        {
             removedStr[i] = '\0';
             end = 0;
         }
-        else{
+        else
+        {
             removedStr[i] = temp[i];
         }
         i++;
@@ -131,18 +168,25 @@ char *removeEnd(char *temp){
     return removedStr;
 }
 
-char *getTaskInfo(char *paramName, int number, char *fileName){
+char *getTaskInfo(char *paramName, int number, char *fileName)
+{
     char line[1000];
     int count = 0;
     char *myParam;
     myParam = malloc(CHAR_SIZE * 255);
     FILE *fp = fopen(fileName, "r");
-    if (fp != NULL && paramName != NULL && myParam != NULL){
-        while (fgets(line, 255, fp) != NULL){
-            if (line[0] == '=' && line[1] == '='){
-                if (count == number){
-                    while (strchr(line, '+') == NULL && strchr(line, '=') == NULL){
-                        if (strstr(line, paramName) != NULL){
+    if (fp != NULL && paramName != NULL && myParam != NULL)
+    {
+        while (fgets(line, 255, fp) != NULL)
+        {
+            if (line[0] == '=' && line[1] == '=')
+            {
+                if (count == number)
+                {
+                    while (strchr(line, '+') == NULL && strchr(line, '=') == NULL)
+                    {
+                        if (strstr(line, paramName) != NULL)
+                        {
                             strcpy(myParam, strchr(line, '>') + 1);
                         }
                         fgets(line, 255, fp);
@@ -153,22 +197,26 @@ char *getTaskInfo(char *paramName, int number, char *fileName){
             }
         }
     }
-    else{
+    else
+    {
         printf("Problème de mémoire.");
         return NULL;
     }
     return NULL;
 }
 
-char **explodeInC(char separator, char *str){
+char **explodeInC(char separator, char *str)
+{
     char *tmp = (char *)malloc(strlen(str));
     tmp = strcpy(tmp, str);
     char **finalStr = (char **)malloc(CHARP_SIZE);
     finalStr[0] = *tmp;
     int actualSize = 1;
     int i = 0;
-    while (*tmp != '\0'){
-        if (*tmp == separator){
+    while (*tmp != '\0')
+    {
+        if (*tmp == separator)
+        {
             finalStr = (char **)realloc(finalStr, (++actualSize) * CHARP_SIZE);
             finalStr[actualSize - 1] = tmp + 1;
             *tmp = 0;
@@ -177,24 +225,32 @@ char **explodeInC(char separator, char *str){
     }
     return finalStr;
 }
-char **getTaskAction(int number, char *fileName){
+char **getTaskAction(int number, char *fileName)
+{
     char **actionTab;
     int count = 0;
     int isUnder = 0;
     char line[1000];
     FILE *fp = fopen(fileName, "r");
-    if (fp != NULL){
-        while (fgets(line, 255, fp)){
-            if (line[0] == '=' && line[1] == '='){
+    if (fp != NULL)
+    {
+        while (fgets(line, 255, fp))
+        {
+            if (line[0] == '=' && line[1] == '=')
+            {
                 isUnder = 1;
             }
-            if (line == '=' && line[1] != '='){
+            if (line == '=' && line[1] != '=')
+            {
                 isUnder = 0;
             }
-            if (isUnder == 1 && strchr(line, '+') != NULL){
+            if (isUnder == 1 && strchr(line, '+') != NULL)
+            {
                 fgets(line, 255, fp);
-                if (number == count){
-                    if (strchr(line, '{') != NULL){
+                if (number == count)
+                {
+                    if (strchr(line, '{') != NULL)
+                    {
                         actionTab = explodeInC(',', line);
                         return actionTab;
                     }
@@ -205,10 +261,12 @@ char **getTaskAction(int number, char *fileName){
     }
     return NULL;
 }
-bool isInt (char value){
-        return (value > 47 && value<58) ;
+bool isInt (char value)
+{
+    return (value > 47 && value<58) ;
 }
-bool isTurn(char * string){
+bool isTurn(char * string)
+{
     return (strstr(string,'on') != NULL || strstr(string,'off') != NULL);
 }
 void writeLogs(char *string, char *fileName)
