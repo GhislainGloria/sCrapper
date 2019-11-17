@@ -49,8 +49,6 @@ int addValue(Option *option, char *value){
 		printf("So much value");
 		exit(1);
 	}
-
-
 	option->value[option->nbreCurrentValue] = value;
 	option->nbreCurrentValue++;
 	return 0;

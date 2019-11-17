@@ -22,6 +22,7 @@ Task *initTask(){
 	task->criterion = malloc(sizeof(Criterion));
 	task->nbrCurrentAction = 0;
 	task->tabActionLength = 5;
+	task->actionNameTemp = malloc(sizeof(char)*255);
 	task->tabAction = malloc(sizeof(Action*)*task->tabActionLength);
 	return task;
 }
@@ -51,6 +52,14 @@ int addCriterion(Task *task, Criterion *criterion){
 	return 0;
 }
 
+int addActionTempName(Task *task, char *name){
+	if(task == NULL){
+			printf("No task");
+			exit(1);
+	}
+	task->actionNameTemp = name;
+	return 0;
+}
 
 int addAction(Task *task, Action *action){
 	if(task == NULL){
@@ -77,8 +86,10 @@ void delTask(Task *task){
 		printf("Nothing to free");
 		exit(1);
 	}
-	for(int i = 0; i<task->nbrCurrentAction;i++){
-		free(task->tabAction[i]);
+	if(task->nbrCurrentAction > 0){
+		for(int i = 0; i<task->nbrCurrentAction;i++){
+			free(task->tabAction[i]);
+		}
 	}
 	free(task->criterion);
 	free(task->tabAction);

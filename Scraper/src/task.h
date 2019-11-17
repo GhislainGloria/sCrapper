@@ -14,7 +14,8 @@ typedef struct{
 	Criterion *criterion;
 	int nbrCurrentAction;
 	int tabActionLength;
-	Action **tabAction;
+	char *actionNameTemp;   //Will be compared with all of Actions
+ 	Action **tabAction;
 }Task;
 
 
@@ -23,6 +24,8 @@ Task *initTask();
 int addNameTask(Task* task, char* name);
 
 int addCriterion(Task *task, Criterion *criterion);
+
+int addActionTempName(Task *task, char *name);
 
 int addAction(Task *task, Action *action);
 

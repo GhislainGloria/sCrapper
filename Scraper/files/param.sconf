@@ -1,24 +1,25 @@
 =
 {name -> Mon Site Web}
-{url -> value}
+{url -> "www.google.fr"}
 +
-{option1 -> 3}
+{option1 -> 1111}
 {option2 -> 4}
-{option3 -> 5}
-{option3 -> 5}
 {option3 -> 5}
 {option3 -> 5}
 =
 {name -> Mon Site Web2}
-{url -> value2}
+{url -> "www.yahoo.fr"}
 +
 =
 {name -> Mon Site Web3}
-{url -> value3}
+{url -> "www.youtube.fr"}
 +
-{option1 -> 3}
-{option2 -> 4}
-{option3 -> 5}
+{option1 -> 999999999}
+{option2 -> 20998198}
+{option3 -> 1209}
+
+
+
 
 
 ==
@@ -34,7 +35,7 @@ name -> Ma super Tache euhhh}
 name -> Christmas TaRATSIMsk}
 {second -> 2}
 +
-(Mon Site Web)
+(Mon Site Web3)
 
 
 
