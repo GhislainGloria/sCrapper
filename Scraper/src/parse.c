@@ -68,7 +68,7 @@ int countActionOption(int number, char *fpp)
     return totalOption;
 }
 
-void GetOption(int number, char **option1, char **option2, char **option3,  char *file)
+void GetOption(int number, char **option1, char **option2, char **option3, char *file)
 {
     char line[1000];
     int numberOption1 = 0;
@@ -85,10 +85,9 @@ void GetOption(int number, char **option1, char **option2, char **option3,  char
 
                 strcpy(*option1, checkOption("option1", &numberOption1, number, option1, line));
                 numberOption1++;
-                if(!isInt(*option1[0]))
+                if (!isInt(*option1[0]))
                 {
-                    writeLogs("Valeur de max-depth incorrecte","erreur.logs");
-
+                    writeLogs("Valeur de max-depth incorrecte", "erreur.logs");
                 }
             }
             else if (checkOption("versioning", &numberOption2, number, option2, line) != NULL)
@@ -96,26 +95,23 @@ void GetOption(int number, char **option1, char **option2, char **option3,  char
                 strcpy(*option2, checkOption("versioning", &numberOption2, number, option2, line));
                 numberOption2++;
 
-                if(isTurn(*option2))
+                if (isTurn(*option2))
                 {
-                    writeLogs("Valeur de l'option versioning incorrecte","erreur.logs");
-
+                    writeLogs("Valeur de l'option versioning incorrecte", "erreur.logs");
                 }
             }
             else if (checkOption("type", &numberOption3, number, option3, line) != NULL)
             {
                 strcpy(*option3, checkOption("type", &numberOption3, number, option3, line));
                 numberOption3++;
-
             }
-
         }
     }
-    if(*option1)
+    if (*option1)
     {
         strcpy(*option1, removeEnd(*option1));
     }
-    else if (*option2)
+    if (*option2)
     {
         strcpy(*option2, removeEnd(*option2));
     }
@@ -123,7 +119,6 @@ void GetOption(int number, char **option1, char **option2, char **option3,  char
     {
         strcpy(*option3, removeEnd(*option3));
     }
-
 }
 
 char *checkOption(char *compare, int *numberOption, int number, char **option, char *line)
@@ -166,6 +161,87 @@ char *removeEnd(char *temp)
         i++;
     }
     return removedStr;
+}
+
+void getTask(int number, char **name, char **hours, char **minutes, char **seconds, char *file)
+{
+    char line[1000];
+    int numberName = 0;
+    int numberHours = 0;
+    int numberMinutes = 0;
+    int numberSeconds = 0;
+    bool isUnder = false;
+
+    FILE *fp = fopen(file, "r");
+    if (fp != NULL)
+    {
+        while (fgets(line, 500, fp) != NULL)
+        {
+            if (line[0] == '=' && line[1] == '=')
+            {
+                isUnder = true;
+            }
+            if (line == '=' && line[1] != '=')
+            {
+                isUnder = false;
+            }
+            if (isUnder)
+            {
+                if (checkOption("name", &numberName, number, name, line) != NULL)
+                {
+                    strcpy(*name, checkOption("name", &numberName, number, name, line));
+                    numberName++;
+                }
+                if (checkOption("hours", &numberHours, number, hours, line) != NULL)
+                {
+                    strcpy(*hours, checkOption("hours", &numberHours, number, hours, line));
+                    numberHours++;
+                }
+                if (checkOption("minutes", &numberMinutes, number, minutes, line) != NULL)
+                {
+                    strcpy(*minutes, checkOption("minutes", &numberMinutes, number, minutes, line));
+                    numberMinutes++;
+                }
+                if (checkOption("secondes", &numberSeconds, number, seconds, line) != NULL)
+                {
+                    strcpy(*seconds, checkOption("secondes", &numberSeconds, number, seconds, line));
+                    numberSeconds++;
+                }
+            }
+        }
+        if (*name)
+        {
+            strcpy(*name, removeEnd(*name));
+        }
+        else
+        {
+            *name = NULL;
+        }
+        if (*hours)
+        {
+            strcpy(*hours, removeEnd(*hours));
+        }
+        else
+        {
+            *hours = NULL;
+        }
+        if (*minutes)
+        {
+            strcpy(*minutes, removeEnd(*minutes));
+        }
+        else
+        {
+            *minutes = NULL;
+        }
+        if (*seconds)
+        {
+            strcpy(*seconds, removeEnd(*seconds));
+        }
+        else
+        {
+            *seconds = NULL;
+        }
+    }
 }
 
 char *getTaskInfo(char *paramName, int number, char *fileName)
@@ -229,7 +305,7 @@ char **getTaskAction(int number, char *fileName)
 {
     char **actionTab;
     int count = 0;
-    int isUnder = 0;
+    bool isUnder = false;
     char line[1000];
     FILE *fp = fopen(fileName, "r");
     if (fp != NULL)
@@ -238,11 +314,11 @@ char **getTaskAction(int number, char *fileName)
         {
             if (line[0] == '=' && line[1] == '=')
             {
-                isUnder = 1;
+                isUnder = true;
             }
             if (line == '=' && line[1] != '=')
             {
-                isUnder = 0;
+                isUnder = false;
             }
             if (isUnder == 1 && strchr(line, '+') != NULL)
             {
@@ -261,18 +337,18 @@ char **getTaskAction(int number, char *fileName)
     }
     return NULL;
 }
-bool isInt (char value)
+bool isInt(char value)
 {
-    return (value > 47 && value<58) ;
+    return (value > 47 && value < 58);
 }
-bool isTurn(char * string)
+bool isTurn(char *string)
 {
-    return (strstr(string,'on') != NULL || strstr(string,'off') != NULL);
+    return (strstr(string, 'on') != NULL || strstr(string, 'off') != NULL);
 }
 void writeLogs(char *string, char *fileName)
 {
     FILE *fp;
-    char *logs = malloc(CHAR_SIZE * strlen(string)+1);
+    char *logs = malloc(CHAR_SIZE * strlen(string) + 1);
     logs = strcpy(logs, string);
     if (logs[strlen(logs) - 1] == '\0')
     {
@@ -288,7 +364,6 @@ void writeLogs(char *string, char *fileName)
     {
         fp = fopen(fileName, "w+t");
         fputs(logs, fileName);
-
     }
     fclose(fp);
     free(logs);
