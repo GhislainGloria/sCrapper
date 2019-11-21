@@ -1,0 +1,93 @@
+# depslib dependency file v1.0
+1573995968 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\action.c
+	<stdio.h>
+	<stdlib.h>
+	"option.h"
+	"action.h"
+
+1571434766 d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\option.h
+
+1574353052 d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\action.h
+
+1572903334 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\controllertask.c
+	<stdio.h>
+	<stdlib.h>
+	"option.h"
+	"action.h"
+	"critere.h"
+	"task.h"
+	"controllerTask.h"
+
+1571431714 d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\critere.h
+
+1574353079 d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\task.h
+
+1571855546 d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\controllertask.h
+
+1573996220 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\critere.c
+	<stdio.h>
+	<stdlib.h>
+	"critere.h"
+
+1574026323 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\main.c
+	<stdio.h>
+	<stdlib.h>
+	<winsock.h>
+	<string.h>
+	<time.h>
+	"parse.h"
+
+1574352920 d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\parse.h
+	<stdio.h>
+	<stdlib.h>
+	<winsock.h>
+	<string.h>
+	<time.h>
+
+1574352975 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\mainparse.c
+	<stdio.h>
+	<stdlib.h>
+	<winsock2.h>
+	<string.h>
+	<time.h>
+	"parse.h"
+	"option.h"
+	"action.h"
+	"critere.h"
+	"task.h"
+	"controllerTask.h"
+	"scraper.h"
+
+1574070768 d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\scraper.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<curl/curl.h>
+	<curl/easy.h>
+
+1573995878 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\option.c
+	<stdio.h>
+	<stdlib.h>
+	"option.h"
+
+1574353173 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\parse.c
+	"parse.h"
+
+1574350932 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\scraper.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<curl/curl.h>
+	<curl/easy.h>
+	<time.h>
+	"scraper.h"
+	"parse.h"
+
+1574015554 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\crapper\task.c
+	<stdio.h>
+	<stdlib.h>
+	"option.h"
+	"action.h"
+	"critere.h"
+	"task.h"
+

@@ -76,6 +76,8 @@ void delAction(Action *action){
 		printf("Nothing to free");
 		exit(1);
 	}
+	free(action->name);
+	free(action->url);
 	for(int i = 0; i<action->nbrCurrentOption; i++){
 		delOption(action->tabOption[i]);
 	}

@@ -1,0 +1,93 @@
+# depslib dependency file v1.0
+1574026323 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\main.c
+	<stdio.h>
+	<stdlib.h>
+	<winsock.h>
+	<string.h>
+	<time.h>
+	"parse.h"
+
+1574350189 d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\parse.h
+	<stdio.h>
+	<stdlib.h>
+	<winsock.h>
+	<string.h>
+	<time.h>
+
+1574350734 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\parse.c
+	"parse.h"
+
+1573995968 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\action.c
+	<stdio.h>
+	<stdlib.h>
+	"option.h"
+	"action.h"
+
+1571434766 d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\option.h
+
+1571478392 d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\action.h
+
+1572903334 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\controllertask.c
+	<stdio.h>
+	<stdlib.h>
+	"option.h"
+	"action.h"
+	"critere.h"
+	"task.h"
+	"controllerTask.h"
+
+1571431714 d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\critere.h
+
+1574014894 d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\task.h
+
+1571855546 d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\controllertask.h
+
+1573996220 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\critere.c
+	<stdio.h>
+	<stdlib.h>
+	"critere.h"
+
+1573995878 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\option.c
+	<stdio.h>
+	<stdlib.h>
+	"option.h"
+
+1574350874 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\scraper.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<curl/curl.h>
+	<curl/easy.h>
+	<time.h>
+	"scraper.h"
+	"parse.h"
+
+1574015554 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\task.c
+	<stdio.h>
+	<stdlib.h>
+	"option.h"
+	"action.h"
+	"critere.h"
+	"task.h"
+
+1574074185 source:d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\mainparse.c
+	<stdio.h>
+	<stdlib.h>
+	<winsock2.h>
+	<string.h>
+	<time.h>
+	"parse.h"
+	"option.h"
+	"action.h"
+	"critere.h"
+	"task.h"
+	"controllerTask.h"
+	"scraper.h"
+
+1574070768 d:\cours\3 esgi\langage c\iabd\projet_c_test\test_biss\scraper.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<curl/curl.h>
+	<curl/easy.h>
+

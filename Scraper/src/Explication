@@ -28,13 +28,21 @@ Une tache est composée
 	d'une critère
 	d'un compteur d'action
 	de la taille du tableau
-	et du tableau d'action
+	du tableau d'action (non utilisé)
+	d'un char* qui indique le nom de l'action dans la tache
 	
 		J'ai aussi bloqué le nombre d'action(taille du tab action) à 5
 		
 		
-Un controlleur de tache est juste composé
+Un controlleur de tache est juste composé (non utilisé)
 	d'un compteur de tache
 	de la taille du tab
 	et du tab de tache
-	(c'est ICI qu'on va parser et qu'on va ajouter petit à petit dans le tab de tache)
+(ce tableau sera utilisé pour le curl)
+
+
+Les fonctions basiques de parse sont dans parce
+
+L'initialisation et l'ajout des options,actions,taches... se font dans mainparse
+	
+	

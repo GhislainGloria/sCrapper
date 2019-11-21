@@ -65,59 +65,6 @@ void delControllerTask(ControllerTask *controllerTask){
 	free(controllerTask);
 
 }
-
-//-----------------------------------------------TEST---------------------------------------------------//
-int *countAction(char *fname1){
-	FILE *file = fopen(fname1, "r");
-	int nbrAction = 0;
-	if(file != NULL){
-		//printf("File opened\n");
-		char caracter = fgetc(file);
-		while(caracter != EOF){
-			if(caracter == '='){
-				nbrAction++;
-			}
-			caracter = fgetc(file);
-		}
-	}
-	int *pointer = &nbrAction;
-	fclose(file);
-	return pointer;
-}
-
-
-
-
-void parse(char *fname2){
-    int number = 0;
-	int *pointerOnNbrAction = countAction(fname2);
-	printf("LIGNES %d\n",*pointerOnNbrAction);
-	FILE *f = fopen(fname2, "r");
-	if(f != NULL){
-	    while(number != *pointerOnNbrAction)
-        {
-
-        }
-
-	}
-		printf("File opened\n");
-	}
-	fclose(f);
-}
-
-
-
-
-int main(int argc, char* argv[]){
-	char *fname = "files/fconfig.sconf";
-	parse(fname);
-	return EXIT_SUCCESS;
-}
-
-
-
-//-----------------------------------------------TEST---------------------------------------------------//
-
 /*
 
 int main(int argc, char* argv[]){

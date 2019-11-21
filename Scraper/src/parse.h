@@ -16,9 +16,14 @@ char * removeEnd(char * );
 char * checkOption(char * compare, int * numberOption , int number , char ** option, char * line);
 char ** explodeInC(char separator, char * str );
 char ** getTaskAction(int number, char * fileName);
+char *getTaskInfo(char *, int , char *);
 bool isInt(char );
 bool isTurn(char *);
 void writeLogs(char *, char *);
+char *removeGuillemets(char *);
+char *removeHttps(char *);
+
+
     /**
 typedef struct Action
 {

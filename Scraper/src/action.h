@@ -28,6 +28,7 @@ int addUrl(Action *action, char *url);
 int addOption(Action *action, Option *option);
 
 void delAction(Action *action);
+int countAllAction(char *);
 
 
 
